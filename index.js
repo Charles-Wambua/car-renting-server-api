@@ -13,15 +13,27 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// mongoose
+//   .connect(
+//     "mongodb+srv://charlie:charlie98@cluster0.sm89d4x.mongodb.net/car-rental-website?retryWrites=true&w=majority"
+//   )
+//   .then(() => {
+//     console.log("Database connected succesfully");
+//   })
+//   .catch((error) => {
+//     console.log("Database connection failed: " + error);
+//   });
 mongoose
-  .connect(
-    "mongodb+srv://charlie:charlie98@cluster0.sm89d4x.mongodb.net/car-rental-website?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+
   .then(() => {
-    console.log("Database connected succesfully");
+    console.log("Database connected successfully");
   })
   .catch((error) => {
-    console.log("Database connection failed: " + error);
+    console.log("Database connection error: " + error);
   });
 
 // cloudinary.config(
